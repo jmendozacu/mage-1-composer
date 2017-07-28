@@ -1,0 +1,303 @@
+<?xml version="1.0"?>
+<config>
+    <tabs>
+        <plugincompany translate="label" module="plugincompany_autocomplete">
+            <label>Plugin Company</label>
+            <sort_order>20000</sort_order>
+        </plugincompany>
+    </tabs>
+    <sections>
+        <plugincompany_autocomplete translate="label" module="plugincompany_autocomplete">
+            <label>Search Autocomplete</label>
+            <tab>plugincompany</tab>
+            <sort_order>121</sort_order>
+            <show_in_default>1</show_in_default>
+            <show_in_website>1</show_in_website>
+            <show_in_store>1</show_in_store>
+            <groups>
+                <general translate="label">
+                    <label>Front-end Display Settings</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>10</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <expanded>1</expanded>
+                    <fields>
+                        <enable translate="label">
+                            <label>Enable extension</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>0</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>Show Search Autocomplete in front-end store.</comment>
+                        </enable>
+                        <jquery translate="label">
+                            <label>Include jQuery</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>Select 'No' if your store theme already includes jQuery.</comment>
+                        </jquery>
+                        <search_display translate="label">
+                            <label>Search field display type</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>plugincompany_autocomplete/source_display</source_model>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>If 'auto' causes display issues, try the other options.</comment>
+                        </search_display>
+                        <srwidth translate="label">
+                            <label>Search results dropdown width</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>30</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>The width percentage of the dropdown menu relative to the search field width. Use '100' for equal widths.</comment>
+                            <validate>validate-number required-entry</validate>
+                        </srwidth>
+                        <theme translate="label">
+                            <label>Search results dropdown design</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>plugincompany_autocomplete/source_theme</source_model>
+                            <sort_order>40</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>Theme of the search results dropdown menu.</comment>
+                        </theme>
+                        <listdesign translate="label">
+                            <label>Search results dropdown layout</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>plugincompany_autocomplete/source_listdesign</source_model>
+                            <sort_order>50</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>Show results in a list or multi-column grid layout.</comment>
+                        </listdesign>
+                        <highlight translate="label">
+                            <label>Enable search query highlighting</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>60</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>Highlight queries in the search results dropdown text.</comment>
+                        </highlight>
+                        <productlimit translate="label">
+                            <label>Product limit</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>70</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>Maximum amount of displayed product suggestions.</comment>
+                            <validate>validate-number</validate>
+                        </productlimit>
+                        <imagetype translate="label">
+                            <label>Product image type</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>plugincompany_autocomplete/source_Imagetype</source_model>
+                            <sort_order>80</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>Preferred image type shown in the search results.</comment>
+                        </imagetype>
+                        <imagesize translate="label">
+                            <label>Thumbnail image size</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>81</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>Thumbnail size in px, representing the actual image size in the list layout and resolution in grid layouts.</comment>
+                            <validate>validate-number required-entry</validate>
+                        </imagesize>
+                        <show_price translate="label">
+                            <label>Show product price</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>90</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>Include product prices in search results.</comment>
+                        </show_price>
+                        <categories translate="label">
+                            <label>Show categories</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>100</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>Include categories in search results.</comment>
+                        </categories>
+                        <categorylimit translate="label">
+                            <label>Category limit</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>101</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>Maximum amount of displayed category suggestions.</comment>
+                            <validate>validate-number</validate>
+                            <depends>
+                                <categories>1</categories>
+                            </depends>
+                        </categorylimit>
+                        <category_cms_variables translate="label">
+                            <label>Process category variables</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>102</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>Process all {{widget}} and {{variable}} code in category descriptions. This can degrade cache performance.</comment>
+                            <depends>
+                                <categories>1</categories>
+                            </depends>
+                        </category_cms_variables>
+                        <cms_pages translate="label">
+                            <label>Show CMS pages</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>110</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>Include CMS pages in search results.</comment>
+                        </cms_pages>
+                        <cmslimit translate="label">
+                            <label>CMS page limit</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>111</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>Maximum amount of displayed CMS page suggestions.</comment>
+                            <validate>validate-number</validate>
+                            <depends>
+                                <cms_pages>1</cms_pages>
+                            </depends>
+                        </cmslimit>
+                        <cms_cms_variables translate="label">
+                            <label>Process CMS page variables</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>112</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>Process all {{widget}} and {{variable}} code in page descriptions. This can degrade cache performance.</comment>
+                            <depends>
+                                <cms_pages>1</cms_pages>
+                            </depends>
+                        </cms_cms_variables>
+                    </fields>
+                </general>
+                <search translate="label">
+                    <label>Product Suggestion Settings</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>20</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <expanded>1</expanded>
+                    <fields>
+                        <title translate="label">
+                            <label>Title attribute</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>Plugincompany_Autocomplete_Model_Source_Titleattributes</source_model>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>The attribute used as title in the search results.</comment>
+                        </title>
+                        <description translate="label">
+                            <label>Description attribute</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>Plugincompany_Autocomplete_Model_Source_Descriptionattributes</source_model>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>The attribute used as description in the search results.</comment>
+                        </description>
+                        <description_limit translate="label">
+                            <label>Description limit</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>30</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>The character limit of search result descriptions.</comment>
+                        </description_limit>
+                        <product_cms_variables translate="label">
+                            <label>Process product variables</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>35</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>Process all {{widget}} and {{variable}} code in product descriptions. This can degrade cache performance.</comment>
+                        </product_cms_variables>
+                        <keyword translate="label">
+                            <label>Keyword attributes</label>
+                            <frontend_type>multiselect</frontend_type>
+                            <source_model>Plugincompany_Autocomplete_Model_Source_Keywordattributes</source_model>
+                            <sort_order>40</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>The attribute(s) used as keywords for search suggestions. Selecting too many attributes can degrade cache performance.</comment>
+                        </keyword>
+                        <sku translate="label">
+                            <label>Enable advanced SKU parsing</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>50</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>Divide product SKUs into multiple keywords, making partial SKU queries return more results.</comment>
+                        </sku>
+                        <attribute_priority translate="label">
+                            <label>Search suggestion sorting</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>60</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>Sort order of search results based on the priority order of the following attributes: title, description, keywords</comment>
+                        </attribute_priority>
+                        <visibility translate="label">
+                            <label>Product visibility filter</label>
+                            <frontend_type>multiselect</frontend_type>
+                            <source_model>Plugincompany_Autocomplete_Model_Source_Visibility</source_model>
+                            <sort_order>70</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <comment>The allowed product visibility values for search results.</comment>
+                        </visibility>
+                    </fields>
+                </search>
+            </groups>
+        </plugincompany_autocomplete>
+    </sections>
+</config>

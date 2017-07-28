@@ -1,0 +1,446 @@
+//Product page
+
+.product-view .product-essential .product-shop .title h1 {
+  font-size: 1.5rem;
+  @include breakpoint(medium down) {
+    font-size: 1rem;
+  }
+  @include breakpoint(retina) {
+    font-size: 1.25rem;
+  }
+}
+
+.fluidbox-overlay:after {
+  background-image: url('http://i.imgur.com/3qj1wfN.jpg');
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  opacity: .33333;
+  -webkit-filter: blur(4px);
+}
+
+.product-view {
+  .product-essential {
+    .product-shop {
+      ul.pricing-table {
+        margin-bottom: 1rem;
+        h1 {
+          overflow-wrap: break-word;
+          word-wrap: break-word;
+          -webkit-hyphens: auto;
+          -ms-hyphens: auto;
+          -moz-hyphens: auto;
+          hyphens: auto;
+        }
+        li.price {
+          .price-box {
+            span.price {
+              background-color: transparent;
+            }
+            .special-price {
+              .price {
+                color: $alert-color;
+              }
+            }
+          }
+        }
+        li.tier-price {
+          table thead th {
+            text-align: center;
+          }
+        }
+      }
+      .custom-quote {
+        @extend .callout;
+        @extend .text-center;
+        @extend .float-center;
+      }
+    }
+    .product-img-box {
+      .product-images {
+        ul li {
+          text-align: center;
+        }
+      }
+    }
+  }
+}
+
+.product-essential, .product-collateral {
+  margin-bottom: 2em !important;
+}
+
+.product-essential {
+  .product-img-box {
+    .product-image {
+      img {
+        @extend .float-center;
+        max-height: 40rem;
+      }
+    }
+    .product-images {
+      h5 {
+        color: $primary-color;
+        font-size: 1rem;
+      }
+    }
+  }
+  .product-name {
+    text-align: center;
+    h1 {
+      color: $primary-color;
+      line-height: 1.1;
+    }
+  }
+  .pricing-table {
+    .bullet-item {
+      .price {
+        font-size: inherit;
+        background: inherit;
+        padding: 0;
+      }
+      .accordion {
+        text-align: left;
+        .options-list {
+          margin-left: 0;
+        }
+      }
+    }
+    .quantity {
+      .minus, .plus {
+        cursor: pointer;
+      }
+    }
+    .link-wishlist {
+      margin: 0;
+    }
+    li.price {
+      background-color: $white;
+      color: #333333;
+    }
+  }
+  .product-brand {
+    text-align: center;
+  }
+  .sku, .availability, .delivery-time {
+    margin-bottom: 0;
+  }
+  .price-box, .tier-price {
+    p {
+      margin-bottom: 0.2rem;
+    }
+    .regular-price {
+      .price {
+        .price {
+          font-size: 1.3rem;
+        }
+      }
+    }
+    .st-regular-price {
+      .price {
+        font-size: 1rem;
+      }
+      .price_mwst .price {
+        font-size: 0.75rem;
+      }
+    }
+    .skonto-price {
+      .price {
+        color: $success-color;
+      }
+      .skontoPrice {
+        .price {
+          color: $success-color;
+          font-size: 2rem;
+        }
+      }
+    }
+    .st-skonto-price {
+      .skontoPrice {
+        .price {
+          color: $success-color;
+          font-size: 1rem;
+        }
+      }
+    }
+    .st-save-price {
+      .skonto {
+        .price {
+          color: $success-color;
+        }
+      }
+    }
+    .old-price, .msrp-price {
+      .price {
+        font-size: 1rem;
+      }
+    }
+    .special-price, .to-date {
+      color: $alert-color;
+      .price {
+        font-size: 2rem;
+      }
+    }
+  }
+  .tax-details {
+    margin: 0;
+    a {
+      color: $primary-color;
+    }
+  }
+  .delivery-time {
+    margin: 0;
+  }
+  .btn-cart {
+    margin: 1em 0 0 0;
+  }
+}
+
+.add-to-cart,
+.add-to-cart-alt {
+  .input-group {
+    margin-bottom: 0;
+  }
+  i {
+    cursor: pointer;
+  }
+  input {
+    margin-bottom: 0 !important;
+  }
+}
+
+.product-options {
+  .accordion .accordion-navigation > .content,
+  .accordion dd > .content {
+    padding: 0;
+  }
+  li {
+    border-bottom: none !important;
+    padding: 0 !important;
+  }
+  .label {
+    width: 100%;
+    white-space: normal;
+    padding: 0 0 5px 0;
+  }
+  input[type='radio'], input[type='checkbox'] {
+    display: none;
+  }
+  input[type='radio'] + span label, input[type='checkbox'] + span label {
+    margin-bottom: 0;
+    margin-left: 0;
+    position: relative;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    padding: 1rem 2rem 1.0625rem 2rem;
+    color: $white;
+    background-color: $primary-color;
+    cursor: pointer;
+    font-size: 0.8rem;
+    width: 100%;
+    border-radius: $global-radius;
+    a {
+      color: $white;
+    }
+    & + span label {
+      margin-bottom: 0.4rem;
+      position: relative;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      padding: 1rem 2rem 1.0625rem 2rem;
+      color: $white;
+      background-color: $primary-color;
+      cursor: pointer;
+      font-size: 0.8rem;
+      width: 100%;
+      a {
+        color: $white;
+      }
+    }
+  }
+  input[type='radio']:checked + span label, input[type='checkbox']:checked + span label {
+    background-color: $success-color;
+    font-size: 0.8rem;
+    &:after {
+      font-family: FontAwesome;
+      content: ' \f00c';
+    }
+  }
+  .required {
+    text-align: left;
+    margin: 0;
+  }
+  .input-box {
+    .super-attribute-select {
+      margin-bottom: 0;
+    }
+    .validation-advice {
+      background-color: $alert-color;
+      color: $white;
+      padding: 0.2rem 0;
+      margin-bottom: 0.3rem;
+    }
+  }
+}
+
+.box-reviews {
+  .form-add {
+    .buttons-set {
+      .button {
+        float: right;
+      }
+    }
+  }
+}
+
+.top-products {
+  .owl-carousel {
+    margin: 0 !important;
+    .item {
+      padding: 10px;
+    }
+    .owl-item img {
+      display: inline;
+      width: inherit !important;
+    }
+  }
+}
+
+.product-collateral {
+  table.product-attachments {
+    .name {
+      font-size: 1.3rem;
+    }
+    .button, p:last-of-type {
+      margin-bottom: 0;
+    }
+  }
+}
+
+.pricing-table {
+  border-radius: $global-radius;
+  @extend .no-bullet, .text-center;
+  border: solid 1px $light-gray;
+  li {
+    border-bottom: dotted 1px $light-gray;
+    font-size: 0.75rem;
+    padding: 0.875rem 1.125rem;
+    &:last-child {
+      border-bottom: 0;
+    }
+    table {
+      margin-bottom: 0;
+    }
+  }
+  .title {
+    color: $primary-color;
+    font-size: 0.875rem;
+    h1 {
+      margin-bottom: 0;
+    }
+  }
+  .price, .skontoPriceTax {
+    color: $primary-color;
+  }
+  .price-notice .price {
+    color: $white;
+  }
+  .description {
+    color: $primary-color;
+    font-size: 0.625rem;
+  }
+  .button {
+    margin: 0;
+  }
+  .bullet-item {
+    .product-options dl {
+      margin-bottom: 0;
+      ul.accordion:not(:last-child) {
+        margin-bottom: 0.5rem;
+      }
+      .is-active {
+        .accordion-title {
+          border-radius: $global-radius $global-radius 0 0;
+        }
+      }
+      .accordion-title {
+        border-radius: $global-radius;
+      }
+
+    }
+  }
+}
+
+.product-collateral {
+  .tabs {
+    border-radius: $global-radius $global-radius 0 0;
+  }
+  .tabs-content, .tabs-panel {
+    border-radius: 0 0 $global-radius $global-radius;
+  }
+  .tabs-content, .accordion-content {
+    .std {
+      h1, h2, h3, h4, h5, h6 {
+        color: $primary-color;
+      }
+      ul {
+        margin-left: 0;
+        margin-bottom: 1rem;
+        li:before {
+          font-family: FontAwesome;
+          content: "\f101";
+          color: $primary-color;
+          padding-right: 0.5rem;
+        }
+      }
+      ol {
+        margin-left: 0;
+        margin-bottom: 1rem;
+        counter-reset: item;
+        li {
+          display: block;
+        }
+        li:before {
+          content: counter(item) ". ";
+          counter-increment: item;
+          color: $primary-color;
+        }
+      }
+    }
+
+  }
+}
+
+#bcp-spinner {
+  width: 100%;
+  height: 100%;
+  z-index: 1000;
+  background: rgba(255, 255, 255, 0.5) !important;
+  position: fixed;
+  top: 0;
+  left: 0;
+  line-height: 100%;
+  text-align: center;
+  &:before {
+    content: '';
+    display: inline-block;
+    height: 100%;
+    vertical-align: middle;
+    margin-right: -0.25em; /* Adjusts for spacing */
+  }
+  .centered {
+    display: inline-block;
+    vertical-align: middle;
+    i {
+      color: $primary-color;
+    }
+  }
+}

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+    <modules>
+        <Gastrodax_OneStepCheckout>
+            <version>0.1.1</version>
+        </Gastrodax_OneStepCheckout>
+    </modules>
+    <global>
+        <blocks>
+            <gd_onestepc>
+                <class>Gastrodax_OneStepCheckout_Block</class>
+            </gd_onestepc>
+        </blocks>
+        <helpers>
+            <gd_onestepc>
+                <class>Gastrodax_OneStepCheckout_Helper</class>
+            </gd_onestepc>
+        </helpers>
+        <models>
+            <gd_onestepc>
+                <class>Gastrodax_OneStepCheckout_Model</class>
+            </gd_onestepc>
+        </models>
+    </global>
+    <frontend>
+        <layout>
+            <updates>
+                <gd_onestepc module="Gastrodax_OneStepCheckout">
+                    <file>gastrodax_onestepcheckout.xml</file>
+                </gd_onestepc>
+            </updates>
+        </layout>
+        <routers>
+            <checkout>
+                <args>
+                    <modules>
+                        <Gastrodax_OneStepCheckout before="Mage_Checkout">Gastrodax_OneStepCheckout</Gastrodax_OneStepCheckout>
+                    </modules>
+                </args>
+            </checkout>
+        </routers>
+    </frontend>
+    <default>
+        <checkout>
+            <options>
+                <onestep_checkout_enabled>0</onestep_checkout_enabled>
+            </options>
+        </checkout>
+    </default>
+</config>

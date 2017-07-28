@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Gastrodax_AjaxContent>
+            <active>true</active>
+            <codePool>local</codePool>
+    	</Gastrodax_AjaxContent>
+    </modules>
+</config>

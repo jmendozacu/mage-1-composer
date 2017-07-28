@@ -1,0 +1,29 @@
+//Newsletter Popup
+#esns {
+  h1, h2, p {
+    @extend .text-center;
+  }
+  #esns_box_subscribe_form {
+    @include flex-grid-row();
+    #esns_box_subscribe_input {
+      @include flex-grid-column(8);
+    }
+    #esns_box_subscribe_submit {
+      @include flex-grid-column(4);
+      .button {
+        @extend .expanded;
+      }
+    }
+  }
+  #esns_box_subscribe_response_success {
+    display: none;
+  }
+  #esns_box_subscribe_response_error {
+    color: $alert-color;
+    @extend .text-center;
+    @extend .lead;
+  }
+  #esns_box_subscribe_response_success {
+    color: $success-color;
+  }
+}

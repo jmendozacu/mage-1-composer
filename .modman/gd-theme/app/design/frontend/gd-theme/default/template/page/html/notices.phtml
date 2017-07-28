@@ -1,0 +1,15 @@
+<?php if ($this->displayNoscriptNotice()): ?>
+    <noscript>
+        <div class="callout nojs alert global-site-notice noscript">
+            <h5><?php echo $this->__('JavaScript seems to be disabled in your browser.'); ?></h5>
+            <p><?php echo $this->__('You must have JavaScript enabled in your browser to utilize the functionality of this website.'); ?></p>
+        </div>
+    </noscript>
+<?php endif; ?>
+<?php if ($this->displayDemoNotice()): ?>
+    <div class="global-site-notice demo-notice">
+        <div class="notice-inner">
+            <p><?php echo $this->__('This is a demo store. Any orders placed through this store will not be honored or fulfilled.') ?></p>
+        </div>
+    </div>
+<?php endif; ?>

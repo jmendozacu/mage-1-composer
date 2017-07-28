@@ -1,0 +1,149 @@
+/* Icon-box */
+.widget-static-block {
+  margin-top: 1em;
+}
+
+.widget-icon-box {
+  padding: 8px 0;
+  border-bottom: 1px solid $primary-color;
+  width: 100%;
+  text-align: center;
+  line-height: 1rem;
+
+  @include breakpoint(medium) {
+    width: auto;
+    text-align: left;
+  }
+
+  @include breakpoint(large) {
+    border-bottom: none;
+  }
+
+  .icon-box {
+    text-align: left;
+    color: $primary-color;
+
+    &:hover {
+      text-decoration: none;
+    }
+  }
+
+  &:first-of-type {
+    border-top: 1px solid $primary-color;
+
+    @include breakpoint(large) {
+      border-top: 0;
+    }
+  }
+
+  div.icon-box {
+    cursor: default;
+  }
+}
+
+.icon-box {
+  width: 230px;
+  display: inline-block;
+  padding-right: 15px;
+  margin-left: 15px;
+  text-align: left;
+
+  @include breakpoint(medium) {
+    width: 210px;
+  }
+
+  > .fa {
+    float: left;
+    margin-right: 10px;
+  }
+}
+
+.icon-box_title {
+  margin: 4px 0 0 0;
+  font-size: 0.8rem;
+  font-weight: bold;
+  color: $primary-color;
+  line-height: 0.5rem;
+
+  @include breakpoint(medium) {
+    font-size: 1.1rem;
+    line-height: 1;
+  }
+}
+
+.icon-box_subtitle {
+  color: $primary-color;
+  font-size: 0.7rem;
+  line-height: 0.5rem;
+
+  @include breakpoint(medium) {
+    font-size: 1rem;
+    line-height: 1rem;
+  }
+}
+
+.cart_count {
+  font-weight: bold;
+  color: $white;
+  text-align: center;
+  position: relative;
+}
+
+/* Icon-box With Flexbox*/
+html.flexbox {
+  .header-widgets {
+    @include breakpoint(large) {
+      display: flex;
+      justify-content: center;
+      float: none;
+      border-bottom: none;
+    }
+
+    @include breakpoint(xlarge) {
+      justify-content: flex-end;
+    }
+  }
+
+  .widget-icon-box {
+    display: flex;
+    justify-content: center;
+
+    @include breakpoint(large) {
+      justify-content: flex-start;
+      float: none;
+    }
+
+    .icon-box {
+      width: auto;
+      display: inherit;
+    }
+
+    .icon-box__text {
+      flex-direction: column;
+    }
+  }
+
+  .widget-social-icons {
+    @include breakpoint(medium) {
+      float: none;
+    }
+  }
+}
+
+/* Social Icons */
+.widget-social-icons {
+  text-align: center;
+  padding: 9px 0;
+  margin: 0 10px;
+
+  @include breakpoint(medium) {
+    float: right;
+    text-align: left;
+  }
+}
+
+.social-icons__link {
+  font-size: 25px;
+  padding: 0 8px;
+  color: $primary-color;
+}

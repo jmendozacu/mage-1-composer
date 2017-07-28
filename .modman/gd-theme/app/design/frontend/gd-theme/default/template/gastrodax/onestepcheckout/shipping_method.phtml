@@ -1,0 +1,16 @@
+<div id="shipping_method-please-wait" class="step-please-wait" style="display:none">
+    <div class="centered">
+        <i class="fa fa-circle-o-notch fa-spin fa-3x fa-fw margin-bottom"></i>
+    </div>
+</div>
+<div class="onestep-step">
+    <form id="co-shipping-method-form" action="">
+        <div id="checkout-load-shipping_method">
+            <?php echo $this->getChildHtml('available') ?>
+        </div>
+        <div id="reload-shipping-method">
+            <a href="#" id="reload-shipping-method-button" class="button split no-pip secondary"><?php echo $this->__('Update shipping options');?><span><i class="fa fa-refresh"></i></span></a>
+        </div>
+    </form>
+</div>
+

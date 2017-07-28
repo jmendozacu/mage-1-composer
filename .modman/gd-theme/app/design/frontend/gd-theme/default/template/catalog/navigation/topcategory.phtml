@@ -1,0 +1,36 @@
+<?php
+/**
+ * @project gastrodax
+ *
+ * @author pbreitsprecher
+ * @copyright 2016
+ * @license https://opensource.org/licenses/MIT The MIT License (MIT)
+ *
+ * @last_modified 12.09.16 10:08
+ * @file topcategory.phtml
+ *
+ */
+
+$_categories = $this->getCurrentChildCategories(); ?>
+<ul class="categories-grid">
+    <?php foreach ($_categories as $_category): ?>
+        <?php if ($_category->getIsActive()): ?>
+            <?php $_category = Mage::getModel("catalog/category")->load($_category->getEntityId()); ?>
+            <li>
+                <div class="category-image">
+                    <a href="<?php echo $_category->getURL() ?>"
+                       title="<?php echo $this->htmlEscape($_category->getName()) ?>">
+                        <?php if ($_imageUrl = $_category->getImageUrl()) : ?>
+                            <img src="<?php echo $_imageUrl; ?>"
+                                 alt="<?php echo $this->htmlEscape($_category->getName()) ?>"/>
+                        <?php endif; ?>
+                    </a>
+                    <h2>
+                        <a href="<?php echo $_category->getURL() ?>"
+                           title="<?php echo $this->htmlEscape($_category->getName()) ?>"><?php echo $this->htmlEscape($_category->getName()) ?></a>
+                    </h2>
+                </div>
+            </li>
+        <?php endif; ?>
+    <?php endforeach; ?>
+</ul>

@@ -1,0 +1,49 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Gastrodax_Sitemap>
+            <version>1.0.0</version>
+        </Gastrodax_Sitemap>
+    </modules>
+    <global>
+        <models>
+            <gastrodax_sitemap>
+                <class>Gastrodax_Sitemap_Model</class>
+            </gastrodax_sitemap>
+            <sitemap>
+                <rewrite>
+                    <sitemap>Gastrodax_Sitemap_Model_Sitemap</sitemap>
+                </rewrite>
+            </sitemap>
+        </models>
+        <helpers>
+            <gastrodax_sitemap>
+                <class>Gastrodax_Sitemap_Helper</class>
+            </gastrodax_sitemap>
+        </helpers>
+    </global>
+    <adminhtml>
+        <acl>
+            <resources>
+                <all>
+                    <title>Allow Everything</title>
+                </all>
+                <admin>
+                    <children>
+                        <system>
+                            <children>
+                                <config>
+                                    <children>
+                                        <gastrodax_sitemap>
+                                            <title>Gastrodax Sitemap</title>
+                                        </gastrodax_sitemap>
+                                    </children>
+                                </config>
+                            </children>
+                        </system>
+                    </children>
+                </admin>
+            </resources>
+        </acl>
+    </adminhtml>
+</config>

@@ -1,0 +1,10 @@
+<table class="form-list">
+    <tr>
+        <td class="scope-label">
+            <button onclick="setLocation('<?php echo Mage::helper('adminhtml')->getUrl('adminhtml/autocomplete/cachesuggestions'); ?>')" type="button" class="scalable"><span><span><span><?php echo Mage::helper('adminhtml')->__('Flush Autocomplete Cache') ?></span></span></span></button>
+        </td>
+        <td class="scope-label">
+            <?php echo Mage::helper('adminhtml')->__('Rebuild the search suggestion cache.')?>
+        </td>
+    </tr>
+</table>

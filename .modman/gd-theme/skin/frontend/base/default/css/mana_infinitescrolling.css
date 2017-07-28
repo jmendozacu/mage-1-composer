@@ -1,0 +1,18 @@
+/**
+ * @category    Mana
+ * @package     Mana_InfiniteScrolling
+ * @copyright   Copyright (c) http://www.manadev.com
+ * @license     http://www.manadev.com/license  Proprietary License
+ */
+.mb-infinitescrolling-engine { display: none; }
+.infinite-scrolling-list-loader, .infinite-scrolling-grid-loader { text-align: center; }
+.infinite-scrolling-list-loader img, .infinite-scrolling-grid-loader img { display: inline; }
+#m-show-more {
+    position: relative;
+    width: 100%;
+}
+#m-show-more span {
+    height: 50px;
+    line-height: 50px;
+    font-size: 18px;
+}

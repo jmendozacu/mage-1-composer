@@ -1,0 +1,19 @@
+<div id="review-submit-please-wait" class="step-please-wait" style="display:none">
+    <div class="centered">
+        <i class="fa fa-circle-o-notch fa-spin fa-3x fa-fw margin-bottom"></i>
+    </div>
+</div>
+<button
+    type="button"
+    title="<?php echo $this->__('Update order before placing'); ?>"
+    class="button btn-checkout"
+    id="order_submit_button">
+    <span><span><?php echo $this->__('Update order before placing') ?></span></span>
+</button>
+<script type="text/javascript">
+    //<![CDATA[
+    var buttonUpdateText = '<?php echo $this->__('Update order before placing') ?>',
+        buttonSaveText = '<?php echo $this->__('Jetzt kaufen') ?>',
+        buttonWaitText = '<?php echo $this->__('Please wait...') ?>';
+    //]]>
+</script>

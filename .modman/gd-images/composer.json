@@ -1,0 +1,28 @@
+{
+  "name": "sickdaflip/gd-images",
+  "type": "magento-module",
+  "license": "MIT",
+  "description": "GD Images for Magento 1.9.3. ZF-Theme",
+  "authors": [
+    {
+      "name": "Lip",
+      "email": "philippbreitsprecher@gmail.com"
+    }
+  ],
+  "extra": {
+    "map": [
+      [
+        "media/catalog/brands/",
+        "media/catalog/brands/"
+      ],
+      [
+        "skin/frontend/base/default/images/zf/",
+        "skin/frontend/base/default/images/zf/"
+      ],
+      [
+        "favicon.ico",
+        "favicon.ico"
+      ]
+    ]
+  }
+}

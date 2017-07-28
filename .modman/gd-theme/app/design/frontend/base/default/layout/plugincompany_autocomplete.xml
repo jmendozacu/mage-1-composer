@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+    <default>
+        <reference name="head">
+            <action method="addJs" ifconfig="plugincompany_autocomplete/general/jquery">
+                <script>plugincompany/jquerynoconflict.js</script>
+            </action>
+            <action method="addJs">
+                <script>plugincompany/autocomplete/typeahead.bundle.js</script>
+                <params><![CDATA[name="z_load_last"]]></params>
+            </action>
+            <action method="addCss">
+                <stylesheet>css/plugincompany_autocomplete.css</stylesheet>
+            </action>
+        </reference>
+        <reference name="before_body_end">
+            <block type="plugincompany_autocomplete/js" template="plugincompany/autocomplete/js.phtml"></block>
+        </reference>
+    </default>
+</layout>

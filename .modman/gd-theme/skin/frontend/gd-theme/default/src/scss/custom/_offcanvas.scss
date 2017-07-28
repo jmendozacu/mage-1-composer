@@ -1,0 +1,45 @@
+
+.nav-menu {
+  margin-top: 1rem;
+  width: 299px;
+  border-bottom: 1px solid $medium-gray;
+  .menu.nested {
+    margin-left: 0;
+    a {
+      margin-left: 1rem;
+    }
+    .menu.nested {
+      margin-left: 0;
+      a {
+        margin-left: 2rem;
+      }
+      .menu.nested {
+        margin-left: 0;
+        a {
+          margin-left: 3rem;
+        }
+        .menu.nested {
+          margin-left: 0;
+          a {
+            margin-left: 4rem;
+          }
+          .menu.nested {
+            margin-left: 0;
+            a {
+              margin-left: 5rem;
+            }
+          }
+        }
+      }
+    }
+  }
+  li {
+    border-bottom: 1px solid $medium-gray;
+    &:first-child {
+      border-top: 1px solid $medium-gray;
+    }
+    &:last-child {
+      border-bottom: 0;
+    }
+  }
+}

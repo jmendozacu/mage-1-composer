@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Gastrodax_Layout>
+            <version>0.0.1</version>
+        </Gastrodax_Layout>
+        <depends>
+            <!-- no dependencies -->
+        </depends>
+    </modules>
+    <global>
+        <page>
+            <layouts>
+                <fullwidth_layout module="page" translate="label">
+                    <label>Volle Breite</label>
+                    <template>page/fullwidth.phtml</template>
+                    <layout_handle>fullwidth_layout</layout_handle>
+                </fullwidth_layout>
+                <home_layout module="page" translate="label">
+                    <label>Startseite</label>
+                    <template>page/1column-home.phtml</template>
+                    <layout_handle>home_layout</layout_handle>
+                </home_layout>
+            </layouts>
+        </page>
+        <blocks>
+            <page>
+                <rewrite>
+                    <html_topmenu>Gastrodax_Layout_Block_Topmenu</html_topmenu>
+                </rewrite>
+            </page>
+        </blocks>
+        <helpers>
+            <layout>
+                <class>Gastrodax_Layout_Helper</class>
+            </layout>
+        </helpers>
+    </global>
+    <frontend>
+        <layout>
+            <updates>
+                <Gastrodax_Layout>
+                    <file>gastrodax_layout.xml</file>
+                </Gastrodax_Layout>
+            </updates>
+        </layout>
+    </frontend>
+</config>

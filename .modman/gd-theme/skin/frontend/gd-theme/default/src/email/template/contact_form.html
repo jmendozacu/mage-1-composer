@@ -1,0 +1,31 @@
+<!--@subject {{var store.getFrontendName()}} Kontaktformular von {{var data.name}} @-->
+<!--@vars
+{"store url=\"\"":"Store Url",
+"var logo_url":"Email Logo Image Url",
+"var logo_alt":"Email Logo Image Alt",
+"var data.name":"Sender Name",
+"var data.email":"Sender Email",
+"var data.telephone":"Sender Telephone",
+"var data.comment":"Comment",
+"var store.getFrontendName()":"Store Name"}
+@-->
+<!--@styles
+@-->
+<raw>{{template config_path="design/email/header"}}</raw>
+<raw>{{inlinecss file="email-inline.css"}}</raw>
+<container>
+    <row>
+        <columns>
+            <h1>Kontaktformular</h1>
+            <p>
+                Name: {{var data.name}}<br>
+                E-Mail: {{var data.email}}<br>
+                Telefon: {{var data.telephone}}<br>
+                <br>
+                Kommentar: {{var data.comment}}<br>
+            </p>
+        </columns>
+    </row>
+    <raw>{{template config_path="design/email/support"}}</raw>
+</container>
+<raw>{{template config_path="design/email/footer"}}</raw>

@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+@category    Mana
+@package     Mana_InfiniteScrolling
+@copyright   Copyright (c) http://www.manadev.com
+@license     http://www.manadev.com/license  Proprietary License
+ -->
+<config>
+    <modules>
+        <Mana_InfiniteScrolling>
+            <version>16.08.2216</version>
+        </Mana_InfiniteScrolling>
+    </modules>
+    <global>
+        <helpers>
+            <mana_infinitescrolling>
+                <class>Mana_InfiniteScrolling_Helper</class>
+            </mana_infinitescrolling>
+        </helpers>
+        <blocks>
+            <mana_infinitescrolling>
+                <class>Mana_infiniteScrolling_Block</class>
+            </mana_infinitescrolling>
+        </blocks>
+    </global>
+    <frontend>
+        <layout>
+            <updates module="Mana_InfiniteScrolling">
+                <mana_infinitescrolling>
+                    <file>mana_infinitescrolling.xml</file>
+                </mana_infinitescrolling>
+            </updates>
+        </layout>
+        <translate>
+            <modules>
+                <Mana_InfiniteScrolling>
+                    <files>
+                        <default>Mana_InfiniteScrolling.csv</default>
+                    </files>
+                </Mana_InfiniteScrolling>
+            </modules>
+        </translate>
+    </frontend>
+    <mana_core>
+        <routers>
+            <mana_infinitescrolling>
+                <class>Mana_InfiniteScrolling_Router</class>
+                <sort_order>100</sort_order>
+            </mana_infinitescrolling>
+        </routers>
+    </mana_core>
+    <default>
+        <mana>
+            <ajax>
+                <url_key_infinitescrolling>ajax/infinite-scrolling</url_key_infinitescrolling>
+                <route_separator_filter>requested-url</route_separator_filter>
+                <page_separator>page</page_separator>
+                <limit_separator>limit</limit_separator>
+            </ajax>
+        </mana>
+        <mana_infinitescrolling>
+            <infinitescrolling>
+                <pages_per_show_more>5</pages_per_show_more>
+                <effect_duration>300</effect_duration>
+                <recover_scroll_progress_on_back>1</recover_scroll_progress_on_back>
+            </infinitescrolling>
+        </mana_infinitescrolling>
+    </default>
+</config>

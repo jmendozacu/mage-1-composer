@@ -1,0 +1,460 @@
+<?php if (Mage::getStoreConfigFlag('plugincompany_autocomplete/general/enable')) { ?>
+    <?php $imgSize = Mage::getStoreConfig('plugincompany_autocomplete/general/imagesize'); ?>
+    <?php $display = Mage::getStoreConfig('plugincompany_autocomplete/general/search_display'); ?>
+    <?php $listDesign = Mage::getStoreConfig('plugincompany_autocomplete/general/listdesign'); ?>
+    <?php $highlight = Mage::getStoreConfig('plugincompany_autocomplete/general/highlight'); ?>
+    <?php if($listDesign == "design-list"){ ?>
+        <style type="text/css">
+            #sResult .b img {width:<?php echo $imgSize; ?>px!important;height:<?php echo $imgSize; ?>px!important}
+        </style>
+    <?php } ?>
+    <script type="text/javascript">
+        if (!Date.now) {
+            Date.now = function() { return new Date().getTime(); }
+        }
+    </script>
+    <script type="text/javascript">
+        var addCount = 0;
+        var search2 = jQuery('#search');
+        var defaultSearchVal = jQuery('#search').val();
+        var oSearchWidth = search2.outerWidth();
+        var resultsWidth = (<?php echo Mage::getStoreConfig('plugincompany_autocomplete/general/srwidth');?>/100);
+        var PCProductsSearch;
+        var PCCMSSearch;
+        var PCCategorySearch;
+        var attributePriorities = <?php echo $this->getAttributePriorities(); ?>;
+        var startSorting;
+        var lastQuery;
+        var sugListDesign = "<?php echo $listDesign;?>";
+        function processData(data) {
+            var i = 0;
+            jQuery.each(data, function (k, v){
+                if(typeof v !== "undefined"){
+                    addCount++;
+                    if(typeof v['type'] != "undefined"){
+                        if(v['type'] == 'cms'){
+                            PCCMSSearch.add(v);
+                        }else{
+                            PCCategorySearch.add(v);
+                        }
+                    }else{
+                        PCProductsSearch.add(v);
+                    }
+                }
+                if(i >= data.length){
+                    return false;
+                }
+                i++;
+                if(i > 200){
+                    setTimeout(function() {
+                        processData(data.slice(i));
+                    },20)
+                    return false;
+                }
+            });
+        }
+
+        function initPCAutocomplete(data){
+            var background = jQuery('#search').css('background-color');
+            jQuery('#search_autocomplete').remove();
+            PCProductsSearch = new Bloodhound({
+                datumTokenizer: Bloodhound.tokenizers.obj.whitespace('keywords'),
+                queryTokenizer: Bloodhound.tokenizers.whitespace,
+                local: [ {}],
+                limit: <?php echo $this->getProductLimit(); ?>,
+                sorter: function(a,b){
+                    var one = 0;
+                    var two = 0;
+                    var query = jQuery('#search').val();
+                    query = query.toLowerCase();
+                    var cnt = attributePriorities.length + 1;
+                    jQuery(attributePriorities).each(function(k,v){
+                        if(v == "title"){
+                            v = "name";
+                        }
+                        if(typeof a[v] == "undefined" || a[v] == null){
+                            return;
+                        }
+                        if(typeof b[v] == "undefined" || b[v] == null){
+                            return;
+                        }
+                        var index = a[v].toLowerCase().indexOf(query);
+                        if(index != -1){
+                            one += cnt;
+                            one += 1/(index+cnt);
+                        }
+                        index = b[v].toLowerCase().indexOf(query);
+                        if(index != -1){
+                            two += cnt;
+                            two += 1/(index+cnt);
+                        }
+                        cnt--;
+                    });
+                    return two - one;
+                }
+            });
+            PCProductsSearch.initialize();
+            PCCMSSearch = new Bloodhound({
+                datumTokenizer: Bloodhound.tokenizers.obj.whitespace('keywords'),
+                queryTokenizer: Bloodhound.tokenizers.whitespace,
+                local: [ {}],
+                limit: <?php echo $this->getCMSPageLimit(); ?>,
+                sorter: function(a,b){
+                    var one = 0;
+                    var two = 0;
+                    var query = jQuery('#search').val().toLowerCase();
+                    var cnt = attributePriorities.length + 1;
+                    jQuery(attributePriorities).each(function(k,v){
+                        if(v == "title"){
+                            v = "name";
+                        }
+                        if(typeof a[v] == "undefined" || a[v] == null){
+                            return;
+                        }
+                        if(typeof b[v] == "undefined" || b[v] == null){
+                            return;
+                        }
+                        var index = a[v].toLowerCase().indexOf(query);
+                        if(index != -1){
+                            one += cnt;
+                            one += 1/(index+cnt);
+                        }
+                        index = b[v].toLowerCase().indexOf(query);
+                        if(index != -1){
+                            two += cnt;
+                            two += 1/(index+cnt);
+                        }
+                        cnt--;
+                    });
+                    return two - one;
+                }
+            });
+            PCCMSSearch.initialize();
+            PCCategorySearch = new Bloodhound({
+                datumTokenizer: Bloodhound.tokenizers.obj.whitespace('keywords'),
+                queryTokenizer: Bloodhound.tokenizers.whitespace,
+                local: [ {}],
+                limit: <?php echo $this->getCategoryLimit(); ?>,
+                sorter: function(a,b){
+                    var one = 0;
+                    var two = 0;
+                    var query = jQuery('#search').val().toLowerCase();
+                    var cnt = attributePriorities.length + 1;
+                    jQuery(attributePriorities).each(function(k,v){
+                        if(v == "title"){
+                            v = "name";
+                        }
+                        if(typeof a[v] == "undefined" || a[v] == null){
+                            return;
+                        }
+                        if(typeof b[v] == "undefined" || b[v] == null){
+                            return;
+                        }
+                        var index = a[v].toLowerCase().indexOf(query);
+                        if(index != -1){
+                            one += cnt;
+                            one += 1/(index+cnt);
+                        }
+                        index = b[v].toLowerCase().indexOf(query);
+                        if(index != -1){
+                            two += cnt;
+                            two += 1/(index+cnt);
+                        }
+                        cnt--;
+                    });
+                    return two - one;
+                }
+            });
+            PCCategorySearch.initialize();
+
+            processData(data);
+
+            // passing in `null` for the `options` arguments will result in the default
+            // options being used
+            var jQueryTypeahead = pcFindJqueryTypeahead();
+            jQueryTypeahead('#search').typeahead(
+                {
+                    highlight: <?php echo $highlight ? 'true' : 'false'; ?>,
+                    hint: false,
+                    classNames: {
+                        menu: 'tt-dropdown-menu',
+                        dataset: 'tt-suggestions',
+                        cursor: 'tt-cursor',
+                        hint: 'tt-hint'
+                    }
+                },
+                {
+                    name: 'PCProductsSearch',
+                    displayKey: 'name',
+                    hint:false,
+                    // `ttAdapter` wraps the suggestion engine in an adapter that
+                    // is compatible with the typeahead jQuery plugin
+                    source: PCProductsSearch.ttAdapter(),
+                    limit: <?php echo $this->getProductLimit(); ?>,
+                    templates: {
+                        <?php if(
+                        !Mage::getStoreConfig('plugincompany_autocomplete/general/cms_pages')
+                        && !Mage::getStoreConfig('plugincompany_autocomplete/general/categories')
+                        ){ ?>
+                            empty: [
+                                '<div class="empty-message" style="padding:3px;font-size:0.8em;">',
+                                'Keine Ergebnisse gefunden, drücken Sie die ENTER-Taste um eine vollständige Suche auszuführen.',
+                                '</div>'
+                            ].join('\n'),
+                        <?php } ?>
+                        header:
+                            <?php if(
+                            Mage::getStoreConfigFlag('plugincompany_autocomplete/additiona;/cms_pages')
+                            || Mage::getStoreConfigFlag('plugincompany_autocomplete/general/categories')
+                            ){?>
+                                '<span class="tt-search-title"><?php echo $this->__("Products"); ?></span>',
+                            <?php }else{ ?>
+                                '',
+                            <?php } ?>
+                        suggestion: function(item){
+                            var url = '<?php echo Mage::getBaseUrl('link'); ?>' + item.url_path;
+                            if(item.imageurl != ''){
+                                var imageUrl = '<?php echo Mage::getBaseUrl('media'); ?>catalog/product/cache/' + item.imageurl;
+                            }else{
+                                var imageUrl = '<?php echo Mage::helper('catalog/image')->init(Mage::getSingleton('catalog/product')->setImage('no_selection'),'image'); ?>';
+                            }
+                            var priceHtml = '';
+                            <?php
+                            if(Mage::getStoreConfigFlag('plugincompany_autocomplete/general/show_price')){
+                                $groupID = Mage::getSingleton('customer/session')->getCustomerGroupId();
+                                $currency_code = Mage::app()->getStore()->getCurrentCurrencyCode();
+                                $currency_symbol = Mage::app()->getLocale()->currency( $currency_code )->getSymbol();
+                            ?>
+                            if(typeof item['prices'] != "undefined"){
+                                priceHtml = "<span class='search-price'>" + item['prices'][<?php echo $groupID; ?>] + " <?php echo $currency_symbol; ?></span>";
+                            }
+                            <?php } ?>
+                            if(sugListDesign == "design-list") {
+                                var tra = "<table class='a'><tr border='1'><td class='b' style='width:<?php echo Mage::getStoreConfig('plugincompany_autocomplete/general/imagesize') + 10;?>px'><a href='"+ url +"' ><img src='"+ imageUrl +"' /></a> " + priceHtml + "</td><td class='c'><a href='"+ url +"' ><div class='f'><p class='e'>"+ item.name +"</p>"+ item.description + "</div></a></td></tr></table>";
+                            }else if(sugListDesign == "design-grid-2" || sugListDesign == "design-grid-3" ){
+                                var tra = "<div class='a'><p class='b' style='width:100%'><a href='"+ url +"' ><img style='width:100%' src='"+ imageUrl +"' /></a> " + priceHtml + "</p><div><a href='"+ url +"' ><div class='f'><p class='e'>"+ item.name +"</p>"+ item.description + "</div></a></div></div>";
+                            }
+                            return tra;
+                        },
+                        footer: function(query) {
+                            return '<a class="fullsearch" href="#" onclick="fullSearch(this)">Klicken Sie hier, um eine vollständige Suche durchzuführen</a>';
+                        }
+                    }
+                }
+                <?php if(Mage::getStoreConfig('plugincompany_autocomplete/general/categories')){?>
+                ,{
+                    name: 'PCCategorySearch',
+                    displayKey: 'name',
+                    highlight: <?php echo $highlight ? 'true' : 'false'; ?>,
+                    hint: false,
+                    limit: <?php echo $this->getCategoryLimit(); ?>,
+                    // `ttAdapter` wraps the suggestion engine in an adapter that
+                    // is compatible with the typeahead jQuery plugin
+                    source: PCCategorySearch.ttAdapter(),
+                    templates: {
+                        <?php if(!Mage::getStoreConfig('plugincompany_autocomplete/general/cms_pages')){ ?>
+                            empty: [
+                                '<div class="empty-message" style="padding:3px;font-size:0.8em;">',
+                                'Keine Ergebnisse gefunden, drücken Sie die ENTER-Taste um eine vollständige Suche auszuführen.',
+                                '</div>'
+                            ].join('\n'),
+                        <?php } ?>
+                        header: '<span class="tt-search-title"><?php echo $this->__("Categories"); ?></span>',
+                        suggestion: function(item){
+                            var url = '<?php echo Mage::getBaseUrl('link'); ?>' + item.url_path;
+                            if(item.imageurl){
+                                var image = "<img style='max-width:30px;max-height:30px' src='<?php echo Mage::getBaseUrl('media'); ?>catalog/category/" + item.imageurl + "' />";
+                            }else{
+                                var image = '';
+                            }
+                            var priceHtml = '';
+                            <?php
+                            if(Mage::getStoreConfigFlag('plugincompany_autocomplete/general/show_price')){
+                                $groupID = Mage::getSingleton('customer/session')->getCustomerGroupId();
+                                $currency_code = Mage::app()->getStore()->getCurrentCurrencyCode();
+                                $currency_symbol = Mage::app()->getLocale()->currency( $currency_code )->getSymbol();
+                            ?>
+                            if(typeof item['prices'] != "undefined"){
+                                priceHtml = "<span class='search-price'><?php echo $currency_symbol; ?> " + item['prices'][<?php echo $groupID; ?>] + "</span>";
+                            }
+                            <?php } ?>
+                            if(sugListDesign == "design-list") {
+                                var tra = "<table class='a tt-category'><tr border='1'><td class=''><a href='"+ url +"' ><div class='f'><p class='e'>"+ item.name +"</p></div></a></td></tr></table>";
+                            }else if(sugListDesign == "design-grid-2" || sugListDesign == "design-grid-3" ){
+                                var tra = "<div class='a'><div><a href='"+ url +"' ><div class='f'><p class='e'>"+ item.name +"</p></div></a></div></div>";
+                            }
+                            
+                            return tra;
+                        },
+                        footer: function(query) {
+                            return '<a class="fullsearch" href="#" onclick="fullSearch(this)">Klicken Sie hier, um eine vollständige Suche durchzuführen</a>';
+                        }
+                    }
+                }
+                <?php } ?>
+                <?php if(Mage::getStoreConfig('plugincompany_autocomplete/general/cms_pages')){?>
+                ,{
+                    name: 'PCCMSSearch',
+                    displayKey: 'name',
+                    highlight: <?php echo $highlight ? 'true' : 'false'; ?>,
+                    hint: false,
+                    limit: <?php echo $this->getCMSPageLimit(); ?>,
+                    // `ttAdapter` wraps the suggestion engine in an adapter that
+                    // is compatible with the typeahead jQuery plugin
+                    source: PCCMSSearch.ttAdapter(),
+                    templates: {
+                        empty: [
+                            '<div class="empty-message" style="padding:3px;font-size:0.8em;">',
+                            'Keine Ergebnisse gefunden, drücken Sie die ENTER-Taste um eine vollständige Suche auszuführen.',
+                            '</div>'
+                        ].join('\n'),
+                        header: '<span class="tt-search-title"><?php echo $this->__("Pages"); ?></span>',
+                        suggestion: function(item){
+                            var url = '<?php echo Mage::getBaseUrl('link'); ?>' + item.url_path;
+                            if(sugListDesign == "design-list") {
+                                var tra = "<table class='a'><tr border='1'><td class='c'><a href='"+ url +"' ><div class='f'><p class='e'>"+ item.name +"</p>"+ item.description + "</div></a></td></tr></table>";
+                            }else if(sugListDesign == "design-grid-2" || sugListDesign == "design-grid-3" ){
+                                var tra = "<div class='a'><div><a href='"+ url +"' ><div class='f'><p class='e'>"+ item.name +"</p>" + item.description + "</div></a></div></div>";
+                            }
+                             return tra;
+                        },
+                        footer: function(query) {
+                            return '<a class="fullsearch" href="#" onclick="fullSearch(this)">Klicken Sie hier, um eine vollständige Suche durchzuführen</a>';
+                        }
+                    }
+                }
+                <?php } ?>
+            );
+
+            jQuery('.tt-suggestions-PCProductsSearch,.tt-suggestions-PCCMSSearch,.tt-suggestions-PCCategorySearch').attr('id', 'sResult');
+
+            <?php if(Mage::getStoreConfig('plugincompany_autocomplete/general/theme') == "2"){?>
+                jQuery('.tt-dropdown-menu').addClass('sTheme2')
+            <?php }else{ ?>
+                jQuery('.tt-dropdown-menu').addClass('sTheme1')
+            <?php } ?>
+            jQuery('.tt-dropdown-menu').addClass(sugListDesign);
+            <?php if($display == 'auto'){ ?>
+                var displayType = jQuery('#search').css('display');
+            <?php }else{ ?>
+                var displayType = '<?php echo $display; ?>';
+            <?php } ?>
+            jQuery('.twitter-typeahead').css('display',displayType).css('width',oSearchWidth + 'px');
+            jQuery('.twitter-typeahead')
+                .css('float',jQuery('#search').css('float'));
+
+            jQuery('.tt-dropdown-menu,.fullsearch')
+                .css('margin-right',jQuery('#search').css('margin-right'))
+                .css('margin-left',jQuery('#search').css('margin-left'))
+            ;
+
+            jQuery('#search')
+                .css('background-color', background);
+
+            jQuery('.tt-hint').remove();
+
+            jQuery(document).on('typeahead:selected',function(e,s,d) {
+                document.location = '<?php echo Mage::getBaseUrl('link');?>' + s.url_path;
+            })
+
+            setInterval(function(){
+                jQuery('.twitter-typeahead').css('width','100%');
+                var newResultsWidth = resultsWidth;
+                if(jQuery(window).width() < 770){
+                    newResultsWidth = 1;
+                }
+                jQuery('.tt-dropdown-menu').width(jQuery('.twitter-typeahead').parent().innerWidth() * newResultsWidth);
+            },100);
+        }
+
+        function getSuggestionPart(part){
+            var p = part;
+            var sJSONURL = '<?php echo $this->getUrl('searchautocomplete/index/getjson',array('cache'=>$this->getLastCacheRefresh()));?>';
+            var url = sJSONURL + 'part/' + p;
+            if (localStorage && typeof localStorage[url] !== "undefined" && suggestCacheValid()) {
+                var data = JSON.parse(localStorage[url]);
+                if(typeof data !== "object"){
+                    data = JSON.parse(data);
+                }
+                addPart(p, data);
+            }else{
+                jQuery.getJSON(url, function(data) {
+                    if(localStorage){
+                        try{
+                            localStorage[url] = JSON.stringify(data);
+                            localStorage['autosuggest_cache_time'] = Date.now() / 1000 | 0;
+                        }catch(err){
+                        }
+                    }
+                    addPart(p, data);
+                })
+            }
+        }
+
+        function addPart(part,data) {
+            if(part === 1){
+                initPCAutocomplete(data);
+            }else{
+                processData(data);
+            }
+            if(part < 3){
+                getSuggestionPart(part + 1);
+            }
+        }
+
+        jQuery(document).ready(function () {
+            if (jQuery('#search').length) {
+                getSuggestionPart(1);
+            }
+        });
+        function fullSearch(element) {
+            jQuery(element).closest('form').submit();
+        }
+
+        function suggestCacheValid() {
+            if(!localStorage){
+                return false;
+            }
+            if(typeof localStorage['autosuggest_cache_time'] == 'undefined'){
+                return false;
+            }
+            var last = <?php echo $this->getLastCacheRefresh(); ?>;
+            if(last && last < localStorage['autosuggest_cache_time']){
+                return true;
+            }
+        }
+        if (!Date.now) {
+            Date.now = function() { return new Date().getTime(); }
+        }
+
+        function pcFindJqueryTypeahead(){
+            if(typeof window.jQuery.fn.typeahead != "undefined"){
+                return window.jQuery;
+            }else if(typeof jQuery.fn.typeahead != "undefined"){
+                return jQuery;
+            }else if(typeof $j.fn.typeahead != "undefined"){
+                return $j;
+            }else if(typeof $J.fn.typeahead != "undefined"){
+                return $J;
+            }else if(typeof $jq.fn.typeahead != "undefined"){
+                return $jq;
+            }else if(typeof $JQ.fn.typeahead != "undefined") {
+                return $JQ;
+            }
+        }
+        jQuery('body').on("mouseover", ".tt-suggestion", function () {
+            jQuery('.tt-suggestion').removeClass('tt-cursor');
+            jQuery(this).addClass('tt-cursor');
+        });
+        
+        jQuery(document).on("typeahead:render",function(){
+            if(jQuery('.tt-dropdown-menu .tt-search-title').length){
+                jQuery('.empty-message').hide();
+            }else{
+                jQuery('.empty-message').show();
+            }
+            jQuery('.fullsearch').hide().last().show();
+        })
+
+    </script>
+<?php } ?>

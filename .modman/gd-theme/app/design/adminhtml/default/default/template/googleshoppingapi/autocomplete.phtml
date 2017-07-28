@@ -1,0 +1,17 @@
+<?php
+/**
+ * NOTICE OF LICENSE
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ *
+ */
+?>
+<ul>
+    <?php foreach ($items as $item): ?>
+        <li value="<?php echo $this->escapeUrl($item->getName()); ?>">
+            <strong><?php echo $this->escapeHtml($item->getName()) ?></strong><br/>
+            <?php echo $this->escapeHtml($item->getLang()) ?>
+        </li>
+    <?php endforeach ?>
+</ul>

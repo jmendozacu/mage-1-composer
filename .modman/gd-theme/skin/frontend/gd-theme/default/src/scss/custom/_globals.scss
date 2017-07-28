@@ -1,0 +1,127 @@
+//Lists
+ul {
+  list-style-type: none;
+}
+
+ul.links li {
+  display: inline;
+}
+
+ul, ol, dd {
+  margin: 0;
+}
+
+ol.decimal, ol.decimal > li ol {
+  list-style-type: decimal;
+  list-style-position: inside;
+}
+//Selects
+select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  text-indent: 1px;
+  text-overflow: '';
+}
+select::-ms-expand {
+  display: none;
+}
+//Links
+a {
+  text-decoration: none;
+}
+//Inputs
+.input-group > :last-child {
+  border-radius: 0 $global-radius $global-radius 0;
+}
+// Vertical Align
+.valign-middle {
+  display: table;
+  > .columns {
+    display: table-cell;
+    vertical-align: middle;
+  }
+  > .columns,
+  > [class*="column"] + [class*="column"]:last-child {
+    float: none;
+  }
+}
+
+//row fullwidth
+.fullWidth {
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: initial;
+}
+
+.no-bottom {
+  margin-bottom: 0 !important;
+  padding-bottom: 0 !important;
+}
+
+.accordion-navigation {
+  > a[aria-expanded="true"]:after {
+    color: $primary-color;
+    font-family: FontAwesome;
+    content: "\f0ab";
+    padding-left: 5px;
+    float: right;
+    font-size: 1rem;
+  }
+  > a[aria-expanded="false"]:after {
+    color: $primary-color;
+    font-family: FontAwesome;
+    content: "\f0aa";
+    padding-left: 5px;
+    float: right;
+    font-size: 1rem;
+  }
+}
+//BorderRadius
+.input-group > :not(:first-child):not(:last-child) {
+  border-radius: 0;
+}
+
+a[href^="tel:"]:before {
+  font-family: FontAwesome;
+  content: "\f095";
+  margin-right: 0.5em;
+}
+
+a[href^="mailto:"]:before {
+  font-family: FontAwesome;
+  content: "\f0e0";
+  margin-right: 0.5em;
+}
+
+.std  {
+  h1, h2, h3, h4, h5, h6 {
+    color: $primary-color;
+  }
+  ul:not([class]) {
+    margin-bottom: 1rem;
+    li:before {
+      font-family: FontAwesome;
+      content: "\f101";
+      color: $primary-color;
+      padding-right: 0.5rem;
+    }
+  }
+  ol {
+    margin-left: 0;
+    margin-bottom: 1rem;
+    counter-reset: item;
+    li {
+      display: block;
+    }
+    li:before {
+      content: counter(item) ". ";
+      counter-increment: item;
+      color: $primary-color;
+    }
+  }
+}
+
+.owl-carousel {
+  z-index: 0 !important;
+}

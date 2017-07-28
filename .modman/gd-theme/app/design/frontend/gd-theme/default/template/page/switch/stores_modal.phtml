@@ -1,0 +1,22 @@
+<?php $stores = Mage::getModel('core/store')->getCollection()->addFieldToFilter('is_active', 1)->addFieldToFilter('store_id', array('neq' => 0)); ?>
+<div id="store_view" class="reveal-modal" data-reveal aria-labelledby="modalTitle" aria-hidden="true" role="dialog">
+    <h2 id="modalTitle"><?php echo $this->__('Privat- oder Geschäftskunde?') ?></h2>
+    <p><?php echo $this->__('Bitte wählen Sie den entsprechenden Kundenbereich, um zum passenden Shop zu gelangen.') ?></p>
+    <?php if (count($stores) > 1): ?>
+    <ul class="store_view">
+        <?php foreach ($stores as $store): ?>
+            <li>
+                <a href="<?php echo $store->getCurrentUrl() ?>" >
+                    <?php if ($store->getStoreId() == '4') { ?>
+                        <i class="fa fa-users"></i>
+                    <?php } elseif ($store->getStoreId() == '5') { ?>
+                        <i class="fa fa-user"></i>
+                    <?php } ?>
+                    <label id="<?php echo $this->htmlEscape($store->getName()) ?>"><?php echo $this->htmlEscape($store->getName()) ?></label>
+                </a>
+            </li>
+        <?php endforeach; ?>
+    </ul>
+    <a class="close-reveal-modal" aria-label="Close">&#215;</a>
+</div>
+<?php endif; ?>
